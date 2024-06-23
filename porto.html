@@ -22,7 +22,6 @@
         padding-right: 4px; /* Sesuaikan dengan kebutuhan desain Anda */
         scroll-snap-type: x mandatory; /* Opsi tambahan untuk smooth scrolling jika diperlukan */
         transition: transform 0.5s ease;
-        -webkit-overflow-scrolling: touch; /* Untuk performa gulir yang lebih baik di iOS */
       }
 
       #carousel::-webkit-scrollbar {
@@ -179,13 +178,12 @@
 
             <!-- Projects Section -->
             <section id="projects" class="mt-8">
-              <h2 class="text-2xl font-bold text-gray-800">Projects</h2>
-              <div
-                id="carousel"
-                class="flex space-x-4 overflow-x-auto mt-4 px-4"
-              >
-                <!-- Dynamic Project Cards will be inserted here by JavaScript -->
-              </div>
+                <h2 class="text-2xl font-bold text-gray-800">Projects</h2>
+                <div class="relative">
+                    <div id="carousel" class="flex space-x-4 overflow-x-auto mt-4 px-4"> <!-- Tambahkan px-4 untuk memberikan padding pada carousel -->
+                        <!-- Dynamic Project Cards will be inserted here by JavaScript -->
+                    </div>
+                </div>
             </section>
           </div>
         </main>
@@ -231,8 +229,8 @@
           technologies: [
             "html-icon.png",
             "css-icon.png",
-            "js-icon.png",
-          ], // Replace with actual paths to your icons
+            "js-icon.png", // Replace with actual paths to your icons
+          ],
         },
         {
           id: "project2",
@@ -241,14 +239,17 @@
           technologies: [
             "react-icon.png",
             "node-icon.png",
-            "mongo-icon.png",
-          ], // Replace with actual paths to your icons
+            "mongo-icon.png", // Replace with actual paths to your icons
+          ],
         },
         {
           id: "project3",
           title: "Project 3",
           image: "project3.jpg",
-          technologies: ["vue-icon.png", "firebase-icon.png"], // Replace with actual paths to your icons
+          technologies: [
+            "vue-icon.png",
+            "firebase-icon.png", // Replace with actual paths to your icons
+          ],
         },
         {
           id: "project4",
@@ -256,20 +257,17 @@
           image: "project4.jpg",
           technologies: [
             "angular-icon.png",
-            "typescript-icon.png",
-          ], // Replace with actual paths to your icons
+            "typescript-icon.png", // Replace with actual paths to your icons
+          ],
         },
       ];
 
       function openModal(projectId) {
         const project = projects.find((p) => p.id === projectId);
-        document.getElementById("modal-title").innerText =
-          project.title;
+        document.getElementById("modal-title").innerText = project.title;
         document.getElementById("modal-image").src = project.image;
 
-        const techContainer = document.getElementById(
-          "modal-tech"
-        );
+        const techContainer = document.getElementById("modal-tech");
         techContainer.innerHTML = "";
         project.technologies.forEach((icon) => {
           const img = document.createElement("img");
@@ -287,6 +285,7 @@
       }
 
       const carousel = document.getElementById("carousel");
+
       let isDown = false;
       let startX;
       let scrollLeft;
@@ -296,86 +295,55 @@
         startX = e.pageX - carousel.offsetLeft;
         scrollLeft = carousel.scrollLeft;
       });
+
       carousel.addEventListener("mouseleave", () => {
         isDown = false;
       });
+
       carousel.addEventListener("mouseup", () => {
         isDown = false;
       });
+
       carousel.addEventListener("mousemove", (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - carousel.offsetLeft;
-        const walk = (x - startX) * 2; // Adjust the multiplier for faster scrolling
+        const walk = (x - startX) * 3; // Adjust the speed of scrolling here
         carousel.scrollLeft = scrollLeft - walk;
       });
-
-      const prevBtn = document.getElementById("prev-btn");
-      const nextBtn = document.getElementById("next-btn");
-
-      let currentProjectIndex = 0;
-      const maxVisibleCards = 2;
 
       function renderCarousel() {
         carousel.innerHTML = ""; // Kosongkan carousel sebelum memasukkan card baru
 
-        for (
-          let i = currentProjectIndex;
-          i < currentProjectIndex + maxVisibleCards;
-          i++
-        ) {
-          if (i < projects.length) {
-            const project = projects[i];
-            const card = document.createElement("div");
-            card.classList.add(
-              "bg-white",
-              "shadow-md",
-              "rounded-lg",
-              "p-4",
-              "w-64",
-              "flex-shrink-0"
-            ); // Pastikan card tidak melebihi lebar carousel
-            card.style.flex = `0 0 calc(100% / ${maxVisibleCards})`; // Atur lebar card sesuai dengan jumlah maksimal yang ditampilkan
+        projects.forEach((project) => {
+          const card = document.createElement("div");
+          card.classList.add(
+            "bg-white",
+            "shadow-md",
+            "rounded-lg",
+            "p-4",
+            "w-64",
+            "flex-shrink-0"
+          ); // Pastikan card tidak melebihi lebar carousel
+          card.style.flex = `0 0 calc(100% / ${projects.length})`; // Atur lebar card sesuai dengan jumlah maksimal yang ditampilkan
 
-            const img = document.createElement("img");
-            img.src = project.image;
-            img.alt = project.title;
-            img.classList.add(
-              "rounded-md",
-              "cursor-pointer",
-              "w-full"
-            );
-            img.onclick = () => openModal(project.id);
+          const img = document.createElement("img");
+          img.src = project.image;
+          img.alt = project.title;
+          img.classList.add("rounded-md", "cursor-pointer", "w-full");
+          img.onclick = () => openModal(project.id);
 
-            const title = document.createElement("h3");
-            title.classList.add("text-xl", "font-semibold", "mt-2");
-            title.innerText = project.title;
+          const title = document.createElement("h3");
+          title.classList.add("text-xl", "font-semibold", "mt-2");
+          title.innerText = project.title;
 
-            card.appendChild(img);
-            card.appendChild(title);
-            carousel.appendChild(card);
-          }
-        }
+          card.appendChild(img);
+          card.appendChild(title);
+          carousel.appendChild(card);
+        });
       }
 
       renderCarousel();
-
-      prevBtn.addEventListener("click", () => {
-        if (currentProjectIndex > 0) {
-          currentProjectIndex--;
-          setTimeout(renderCarousel, 100); // Menunda pemanggilan renderCarousel agar efek transisi terlihat
-        }
-      });
-
-      nextBtn.addEventListener("click", () => {
-        if (
-          currentProjectIndex + maxVisibleCards <
-          projects.length
-        ) {
-          currentProjectIndex++;
-          setTimeout(renderCarousel, 100); // Menunda pemanggilan renderCarousel agar efek transisi terlihat
-        }
-      });
     </script>
   </body>
 </html>
