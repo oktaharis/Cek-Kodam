@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Portfolio</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .sidebar-hidden {
+        transform: translateX(-100%);
+      }
+      #carousel {
+        display: flex;
+        overflow-x: auto; /* Memungkinkan untuk gulir horizontal */
+        padding-left: 4px; /* Sesuaikan dengan kebutuhan desain Anda */
+        padding-right: 4px; /* Sesuaikan dengan kebutuhan desain Anda */
+        scroll-snap-type: x mandatory; /* Opsi tambahan untuk smooth scrolling jika diperlukan */
+        transition: transform 0.5s ease;
+        -webkit-overflow-scrolling: touch; /* Untuk performa gulir yang lebih baik di iOS */
+      }
+
+      #carousel::-webkit-scrollbar {
+        display: none; /* Menghilangkan scrollbar bawaan browser jika tidak diinginkan */
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <div class="flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <div
+        id="sidebar"
+        class="bg-gray-800 text-white w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out"
+      >
+        <a href="#" class="text-white flex items-center space-x-2 px-4">
+          <span class="text-2xl font-extrabold">My Portfolio</span>
+        </a>
+        <nav>
+          <a
+            href="#home"
+            class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"
+            >About</a
+          >
+          <a
+            href="#projects"
+            class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"
+            >Projects</a
+          >
+          <a
+            href="#"
+            class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"
+            >Contact</a
+          >
+        </nav>
+      </div>
+
+      <!-- Main content -->
+      <div class="flex-1 flex flex-col overflow-hidden">
+        <header class="flex justify-between items-center bg-white py-4 px-6">
+          <div class="flex items-center">
+            <button
+              id="menu-btn"
+              class="text-gray-500 focus:outline-none md:hidden"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div class="flex items-center">
+            <span class="text-gray-700 text-xl font-semibold"
+              >Welcome to My Portfolio</span
+            >
+          </div>
+        </header>
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+          <div class="container mx-auto px-6 py-8">
+            <!-- Home Section -->
+            <section id="home">
+              <div class="flex flex-col items-center">
+                <img
+                  src="profile.jpg"
+                  alt="Profile Picture"
+                  class="w-40 h-40 rounded-full"
+                />
+                <h1 class="text-3xl font-bold text-gray-800 mt-4">
+                  [Your Name]
+                </h1>
+                <p class="mt-4 text-gray-600 text-center">
+                  I am a [Your Profession] with expertise in [Your Skills]. I
+                  have [X] years of experience in [Field/Industry].
+                </p>
+                <a
+                  href="CV.pdf"
+                  download
+                  class="mt-6 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+                  >Download CV</a
+                >
+              </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="mt-8">
+              <h2 class="text-2xl font-bold text-gray-800">About Me</h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                <!-- Skills Card -->
+                <div class="bg-white shadow-md rounded-lg p-4">
+                  <h3 class="text-xl font-semibold mb-2">Skills</h3>
+                  <div class="mb-2">
+                    <span class="text-gray-600">UI/UX</span>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                      <div
+                        class="bg-blue-600 h-2.5 rounded-full"
+                        style="width: 40%"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="mb-2">
+                    <span class="text-gray-600">Back-end</span>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                      <div
+                        class="bg-green-600 h-2.5 rounded-full"
+                        style="width: 80%"
+                      ></div>
+                    </div>
+                  </div>
+                  <div>
+                    <span class="text-gray-600">App Development</span>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                      <div
+                        class="bg-red-600 h-2.5 rounded-full"
+                        style="width: 30%"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Experience Card -->
+                <div class="bg-white shadow-md rounded-lg p-4">
+                  <h3 class="text-xl font-semibold mb-2">Experience</h3>
+                  <ul class="list-disc list-inside text-gray-600">
+                    <li>2019-2020: Junior Developer at XYZ Company</li>
+                    <li>2020-2022: Mid-level Developer at ABC Inc.</li>
+                    <li>2022-Present: Senior Developer at DEF Ltd.</li>
+                  </ul>
+                </div>
+
+                <!-- Education Card -->
+                <div class="bg-white shadow-md rounded-lg p-4">
+                  <h3 class="text-xl font-semibold mb-2">Education</h3>
+                  <ul class="list-disc list-inside text-gray-600">
+                    <li>2015-2018: Bachelor's Degree in Computer Science</li>
+                    <li>2018-2020: Master's Degree in Software Engineering</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="mt-8">
+              <h2 class="text-2xl font-bold text-gray-800">Projects</h2>
+              <div
+                id="carousel"
+                class="flex space-x-4 overflow-x-auto mt-4 px-4"
+              >
+                <!-- Dynamic Project Cards will be inserted here by JavaScript -->
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      id="modal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden"
+    >
+      <div class="bg-white rounded-lg p-6 w-1/2">
+        <div class="flex justify-between items-center">
+          <h3 id="modal-title" class="text-2xl font-semibold"></h3>
+          <button
+            onclick="closeModal()"
+            class="text-gray-600 hover:text-gray-800"
+          >
+            &times;
+          </button>
+        </div>
+        <img
+          id="modal-image"
+          src=""
+          alt="Project Image"
+          class="mt-4 rounded-md"
+        />
+        <div class="mt-4">
+          <h4 class="text-xl font-semibold">Technologies Used:</h4>
+          <div id="modal-tech" class="flex space-x-4 mt-2">
+            <!-- Icons will be added here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const projects = [
+        {
+          id: "project1",
+          title: "Project 1",
+          image: "project1.jpg",
+          technologies: [
+            "html-icon.png",
+            "css-icon.png",
+            "js-icon.png",
+          ], // Replace with actual paths to your icons
+        },
+        {
+          id: "project2",
+          title: "Project 2",
+          image: "project2.jpg",
+          technologies: [
+            "react-icon.png",
+            "node-icon.png",
+            "mongo-icon.png",
+          ], // Replace with actual paths to your icons
+        },
+        {
+          id: "project3",
+          title: "Project 3",
+          image: "project3.jpg",
+          technologies: ["vue-icon.png", "firebase-icon.png"], // Replace with actual paths to your icons
+        },
+        {
+          id: "project4",
+          title: "Project 4",
+          image: "project4.jpg",
+          technologies: [
+            "angular-icon.png",
+            "typescript-icon.png",
+          ], // Replace with actual paths to your icons
+        },
+      ];
+
+      function openModal(projectId) {
+        const project = projects.find((p) => p.id === projectId);
+        document.getElementById("modal-title").innerText =
+          project.title;
+        document.getElementById("modal-image").src = project.image;
+
+        const techContainer = document.getElementById(
+          "modal-tech"
+        );
+        techContainer.innerHTML = "";
+        project.technologies.forEach((icon) => {
+          const img = document.createElement("img");
+          img.src = icon;
+          img.alt = icon;
+          img.classList.add("w-8", "h-8");
+          techContainer.appendChild(img);
+        });
+
+        document.getElementById("modal").classList.remove("hidden");
+      }
+
+      function closeModal() {
+        document.getElementById("modal").classList.add("hidden");
+      }
+
+      const carousel = document.getElementById("carousel");
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      carousel.addEventListener("mousedown", (e) => {
+        isDown = true;
+        startX = e.pageX - carousel.offsetLeft;
+        scrollLeft = carousel.scrollLeft;
+      });
+      carousel.addEventListener("mouseleave", () => {
+        isDown = false;
+      });
+      carousel.addEventListener("mouseup", () => {
+        isDown = false;
+      });
+      carousel.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - carousel.offsetLeft;
+        const walk = (x - startX) * 2; // Adjust the multiplier for faster scrolling
+        carousel.scrollLeft = scrollLeft - walk;
+      });
+
+      const prevBtn = document.getElementById("prev-btn");
+      const nextBtn = document.getElementById("next-btn");
+
+      let currentProjectIndex = 0;
+      const maxVisibleCards = 2;
+
+      function renderCarousel() {
+        carousel.innerHTML = ""; // Kosongkan carousel sebelum memasukkan card baru
+
+        for (
+          let i = currentProjectIndex;
+          i < currentProjectIndex + maxVisibleCards;
+          i++
+        ) {
+          if (i < projects.length) {
+            const project = projects[i];
+            const card = document.createElement("div");
+            card.classList.add(
+              "bg-white",
+              "shadow-md",
+              "rounded-lg",
+              "p-4",
+              "w-64",
+              "flex-shrink-0"
+            ); // Pastikan card tidak melebihi lebar carousel
+            card.style.flex = `0 0 calc(100% / ${maxVisibleCards})`; // Atur lebar card sesuai dengan jumlah maksimal yang ditampilkan
+
+            const img = document.createElement("img");
+            img.src = project.image;
+            img.alt = project.title;
+            img.classList.add(
+              "rounded-md",
+              "cursor-pointer",
+              "w-full"
+            );
+            img.onclick = () => openModal(project.id);
+
+            const title = document.createElement("h3");
+            title.classList.add("text-xl", "font-semibold", "mt-2");
+            title.innerText = project.title;
+
+            card.appendChild(img);
+            card.appendChild(title);
+            carousel.appendChild(card);
+          }
+        }
+      }
+
+      renderCarousel();
+
+      prevBtn.addEventListener("click", () => {
+        if (currentProjectIndex > 0) {
+          currentProjectIndex--;
+          setTimeout(renderCarousel, 100); // Menunda pemanggilan renderCarousel agar efek transisi terlihat
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (
+          currentProjectIndex + maxVisibleCards <
+          projects.length
+        ) {
+          currentProjectIndex++;
+          setTimeout(renderCarousel, 100); // Menunda pemanggilan renderCarousel agar efek transisi terlihat
+        }
+      });
+    </script>
+  </body>
+</html>
